@@ -1,39 +1,38 @@
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
+
 async function getAllCharacters() {
   const data = await fetch(`http://localhost:3001/api/characters`);
 
   if (!data.ok) {
-    throw new Error("Failed to fetch data");
+    throw new Error("Unable to fetch characters");
   }
-
   return data.json();
 }
 
-export default async function Page() {
+const page = async () => {
   const data = await getAllCharacters();
-
   return (
-    <main>
-      <div className='grid grid-cols-2 gap-1 py-5 md:grid-cols-3 lg:grid-cols-4'>
-        {data?.character?.map((item: any) => {
-          return (
-            <Link
-              href={`/characters/${item.slug}`}
-              key={item.name}
-              className='overflow-hidden rounded-md'
-            >
-              <Image
-                src={item.avatar}
-                alt=''
-                className='transition-all duration-500 hover:scale-110 hover:-rotate-2'
-                width={500}
-                height={500}
-              />
-            </Link>
-          );
-        })}
-      </div>
-    </main>
+    <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+      {data?.character?.map((item: any) => {
+        return (
+          <Link
+            href={`http://localhost:3001/api/characters/${item?.slug}`}
+            key={item?.name}
+          >
+            <Image
+              className=''
+              src={item?.avatar}
+              width={800}
+              height={400}
+              alt='images'
+            />
+          </Link>
+        );
+      })}
+    </div>
   );
-}
+};
+
+export default page;

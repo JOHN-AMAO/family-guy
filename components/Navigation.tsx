@@ -7,7 +7,7 @@ const Navigation = () => {
   return (
     <>
       <div>
-        <div className='flex flex-row justify-between mx-60 mt-8'>
+        <div className='flex flex-row justify-between mx-10 md:mx-60 mt-8'>
           <Image
             src='/logo.png'
             alt='logo'
