@@ -1,14 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-
-async function getAllCharacters() {
-  const data = await fetch("http://localhost:3001/api/characters");
-  if (!data.ok) {
-    throw new Error("unable to fetch data");
-  }
-  return data.json();
-}
+import { getAllCharacters } from "@/lib/characters";
 
 const page = async () => {
   const data = await getAllCharacters();
