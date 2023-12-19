@@ -6,7 +6,7 @@ import { FaArrowRight } from "react-icons/fa";
 const Navigation = () => {
   return (
     <>
-      <div>
+      <div className=' '>
         <div className='flex flex-row justify-between mx-10 md:mx-60 mt-8'>
           <Image
             src='/logo.png'
