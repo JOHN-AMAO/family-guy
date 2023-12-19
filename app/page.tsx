@@ -1,7 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { getAllCharacters } from "@/lib/characters";
+
+async function getAllCharacters() {
+  const data = await fetch(`http://localhost:3000/api/characters`);
+  if (!data.ok) {
+    throw new Error("unable to fetch data");
+  }
+  return data.json();
+}
 
 const page = async () => {
   const data = await getAllCharacters();
@@ -10,7 +17,7 @@ const page = async () => {
       {data.character.map((item: any) => {
         return (
           <Link
-            className='hover:scale-110 '
+            className='hover:scale-110 hover:rotate-2'
             href={`http://localhost:3000/api/characters${item.slug}`}
             key={item.name}
           >
