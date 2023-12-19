@@ -1,24 +1,21 @@
 import characters from "@/data/characters.json";
 import quotes from "@/data/quotes.json";
-import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
 
-export async function GET(req: NextApiRequest, { params }: any) {
+export async function GET(req: any, { params }: any) {
   try {
-    const character = characters.data.find((item) => item.slug === params.slug);
-
+    const character = characters.data.find((item) => (item.slug = params.slug));
     if (!character) {
-      return new NextResponse("Not found", { status: 404 });
+      return new NextResponse("Character not found", { status: 404 });
     }
-    const character_quotes = quotes.data.filter(
-      (item) => item.character_id === character.id
+    const quote = quotes.data.filter(
+      (item) => (item.character_id = character.id)
     );
-
     return NextResponse.json({
       character,
-      character_quotes: character_quotes.length > 0 ? character_quotes : null,
+      quote,
     });
   } catch (error) {
-    return new NextResponse("Interal server Error", { status: 500 });
+    return new NextResponse("Internal server Error occured", { status: 404 });
   }
 }
